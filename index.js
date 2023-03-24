@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./models/index");
-const cookieParser = require("cookie-parser");
 const app = express();
 
 app.use(cors());
