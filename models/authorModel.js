@@ -2,30 +2,28 @@ const { Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
 
-    const User = sequelize.define("user", {
+    const Author = sequelize.define("author", {
 
         id: {
             type: Sequelize.DataTypes.INTEGER,
             primaryKey:true,
             autoincrement: true,
         },
-      username: {
+      author: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      email: {
+      book: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: {
-          isEmail: true,
-        },
       },
-      password: {
+
+      totalpages: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     });
   
-    return User;
+    return Author;
   };
