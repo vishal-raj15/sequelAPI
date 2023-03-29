@@ -2,7 +2,8 @@
 const { Sequelize, DataTypes } = require("sequelize");
 require('dotenv').config();
 
-const sequelize = new Sequelize('sequelAPI_DB',process.env.USER_NAME, process.env.USER_PASSWORD, {
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.USER_NAME, process.env.USER_PASSWORD, {
+    host:process.env.DB_HOST,
     dialect:'mysql'
 })
 

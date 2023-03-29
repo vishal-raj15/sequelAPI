@@ -1,0 +1,38 @@
+version: '3.8'
+services: 
+    crudapp:
+      build:
+        context: .
+      env_file: ./.env
+      command: npm run start:dev
+      volumes: 
+          - .:/app/
+          - /app/node_modules
+      ports:
+        - "3000:3000"
+      environment:  
+        - DB_HOST=mysqldb
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${USER_NAME}
+        - DB_PASSWORD=${USER_PASSWORD}
+      depends_on: 
+          - mysqldb
+    
+    mysqldb:
+      image: mysql:8.0
+      command: --default-authentication-plugin=mysql_native_password
+      restart: unless-stopped
+      env_file: ./.env
+      environment:
+        MYSQL_DATABASE: ${DB_NAME}
+        MYSQL_USER: ${USER_NAME}
+        MYSQL_PASSWORD: ${USER_PASSWORD}
+        MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+
+      volumes:
+        - mysql:/var/lib/mysql
+        - mysql_config:/etc/mysql
+
+volumes:
+    mysql:
+    mysql_config:
